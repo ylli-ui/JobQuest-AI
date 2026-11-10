@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌸 AI Career Interview 🌸</title>
-  <!-- Google Fonts: Fredoka & Nunito for a playful, kid-friendly look -->
+  <!-- Google Fonts: Fredoka & Nunito -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -73,8 +73,8 @@
     /* --- Layout Container --- */
     .container {
       width: 100%;
-      max-width: 950px;
-      padding: 1.5rem;
+      max-width: 980px;
+      padding: 1.2rem;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -83,10 +83,10 @@
     .card {
       background: white;
       border-radius: var(--border-radius);
-      padding: 2rem;
+      padding: 1.8rem;
       box-shadow: var(--shadow-cute);
       border: 3px solid #FFF0F5;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       animation: fadeIn 0.4s ease-out;
     }
 
@@ -102,7 +102,7 @@
     /* --- Titles & Text --- */
     .step-title {
       font-family: 'Fredoka', sans-serif;
-      font-size: 2rem;
+      font-size: 1.9rem;
       color: var(--pink-primary);
       margin-bottom: 0.4rem;
       text-align: center;
@@ -111,8 +111,8 @@
     .step-desc {
       color: var(--text-muted);
       text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 1.8rem;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
       font-weight: 600;
     }
 
@@ -132,7 +132,7 @@
       padding: 0.9rem 1.4rem;
       border: 3px solid #FFD1DC;
       border-radius: 30px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       outline: none;
       transition: all 0.2s;
       background: var(--pink-card-bg);
@@ -150,13 +150,13 @@
       background-color: var(--pink-primary);
       color: white;
       border: none;
-      padding: 0.9rem 2rem;
+      padding: 0.9rem 1.8rem;
       border-radius: 30px;
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       letter-spacing: 0.5px;
       cursor: pointer;
-      min-height: 50px;
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -184,17 +184,17 @@
       background-color: #FFD1DC;
     }
 
-    /* --- STEP 2: Job Selection Grid (11 Jobs) --- */
+    /* --- STEP 2: Job Selection Grid --- */
     .jobs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 1.1rem;
       margin-top: 1rem;
     }
 
     @media (min-width: 600px) {
       .jobs-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
       }
     }
 
@@ -202,7 +202,7 @@
       background: var(--pink-card-bg);
       border: 3px solid #FFE4EC;
       border-radius: 20px;
-      padding: 1rem 0.8rem;
+      padding: 0.9rem 0.6rem;
       text-align: center;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -225,10 +225,10 @@
     }
 
     .job-card img {
-      width: 85px;
-      height: 85px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       border: 3px solid white;
       background: white;
       box-shadow: 0 4px 10px rgba(0,0,0,0.06);
@@ -236,15 +236,15 @@
 
     .job-card h3 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-main);
     }
 
     /* --- STEP 3: Chatroom Layout --- */
     .chat-layout {
       display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 260px 1fr;
+      gap: 1.3rem;
     }
 
     @media (max-width: 768px) {
@@ -260,15 +260,15 @@
       justify-content: center;
       background: var(--pink-card-bg);
       border-radius: 20px;
-      padding: 1.5rem;
+      padding: 1.2rem;
       border: 3px solid #FFE4EC;
     }
 
     .avatar-wrapper {
       position: relative;
-      width: 170px;
-      height: 170px;
-      margin-bottom: 1rem;
+      width: 160px;
+      height: 160px;
+      margin-bottom: 0.8rem;
     }
 
     .avatar-img {
@@ -278,17 +278,16 @@
       border: 5px solid var(--pink-primary);
       background: white;
       box-shadow: 0 8px 20px rgba(255, 107, 157, 0.25);
-      transition: transform 0.1s ease;
     }
 
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 0.5rem 1.2rem;
+      padding: 0.4rem 1.1rem;
       border-radius: 30px;
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       background: #E5E7EB;
       color: var(--text-muted);
     }
@@ -310,11 +309,11 @@
       to { transform: scale(1.04); }
     }
 
-    /* --- Chat Messages --- */
+    /* --- Chat Panel & Suggested Questions --- */
     .chat-panel {
       display: flex;
       flex-direction: column;
-      height: 480px;
+      height: 520px;
     }
 
     .chat-messages {
@@ -323,18 +322,18 @@
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.9rem;
       border: 3px solid #FFE4EC;
       border-radius: 20px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       background: #FFFDFE;
     }
 
     .message {
-      max-width: 82%;
-      padding: 0.9rem 1.2rem;
+      max-width: 85%;
+      padding: 0.85rem 1.2rem;
       border-radius: 22px;
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.45;
       font-weight: 600;
       animation: msgPop 0.25s ease-out;
@@ -362,21 +361,64 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }
 
+    /* Suggested Question Buttons for Students */
+    .suggested-section {
+      margin-bottom: 0.8rem;
+    }
+
+    .suggest-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--pink-primary);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chips-container {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .chip-btn {
+      background: #FFE4EC;
+      color: var(--text-main);
+      border: 2px solid #FFD1DC;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .chip-btn:hover {
+      background: var(--pink-primary);
+      color: white;
+      border-color: var(--pink-primary);
+      transform: translateY(-2px);
+    }
+
     .chat-controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
     }
 
     .btn-mic {
       background-color: #FF4785;
       border-radius: 50%;
-      width: 52px;
-      height: 52px;
-      min-height: 52px;
+      width: 48px;
+      height: 48px;
+      min-height: 48px;
       padding: 0;
       flex-shrink: 0;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .btn-mic.recording {
@@ -416,7 +458,7 @@
       <h2 class="step-title">🌟 Step 2: Choose Your Career</h2>
       <p class="step-desc">Who would you like to interview today?</p>
       <div class="jobs-grid" id="jobsGrid"></div>
-      <div style="margin-top: 1.8rem; text-align: center;">
+      <div style="margin-top: 1.6rem; text-align: center;">
         <button class="btn" onclick="startInterview()">Start Interview 🎤 &rarr;</button>
       </div>
     </div>
@@ -428,15 +470,24 @@
           <div class="avatar-wrapper">
             <img id="avatarImg" class="avatar-img" src="" alt="Avatar" />
           </div>
-          <h3 id="avatarTitle" style="font-family:'Fredoka'; font-size:1.3rem; margin-bottom: 0.5rem; color:var(--pink-primary);">Job Title</h3>
+          <h3 id="avatarTitle" style="font-family:'Fredoka'; font-size:1.3rem; margin-bottom: 0.4rem; color:var(--pink-primary);">Job Title</h3>
           <span id="statusBadge" class="status-badge">AI Idle</span>
         </div>
 
         <div class="chat-panel">
+          <!-- CHAT MESSAGES CONTAINER -->
           <div class="chat-messages" id="chatMessages"></div>
+
+          <!-- SUGGESTED QUESTIONS FOR P.5 STUDENTS -->
+          <div class="suggested-section">
+            <div class="suggest-title">💡 Need an idea? Tap a question to ask:</div>
+            <div class="chips-container" id="suggestedChips"></div>
+          </div>
+
+          <!-- INPUT CONTROLS -->
           <div class="chat-controls">
             <button id="micBtn" class="btn btn-mic" onclick="toggleSTT()" title="Tap to Speak">🎤</button>
-            <input type="text" id="userInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)" />
+            <input type="text" id="userInput" placeholder="Type or select a question..." onkeypress="handleKeyPress(event)" />
             <button class="btn" onclick="sendMessage()">Send</button>
           </div>
         </div>
@@ -449,27 +500,23 @@
   <script>
     // =========================================================================
     // 1. GEMINI API KEY CONFIGURATION
-    // Set your Gemini API Key here. No input is needed from students!
+    // Insert your Gemini API Key here.
     // =========================================================================
     const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
 
     // =========================================================================
     // 2. VECTOR AVATARS GENERATOR (11 JOBS WITH OPEN & CLOSED MOUTH STATES)
-    // Ensures 100% reliable lip-sync animation with zero broken external links!
     // =========================================================================
     function buildCuteSVG(jobKey, isOpenMouth) {
       const mouthShape = isOpenMouth 
         ? `<ellipse cx="100" cy="116" rx="10" ry="12" fill="#FF4785"/><ellipse cx="100" cy="120" rx="6" ry="5" fill="#FF80AB"/>` 
         : `<path d="M90,114 Q100,122 110,114" stroke="#4A3E4E" stroke-width="4" fill="none" stroke-linecap="round"/>`;
 
-      // Base skin, eyes, pink cheeks
       const baseHead = `
         <circle cx="100" cy="100" r="90" fill="#FFF0F5" />
         <circle cx="100" cy="105" r="50" fill="#FFE0BD" />
-        <!-- Pink Cheeks -->
         <circle cx="70" cy="112" r="8" fill="#FFB6C1" opacity="0.8"/>
         <circle cx="130" cy="112" r="8" fill="#FFB6C1" opacity="0.8"/>
-        <!-- Eyes -->
         <circle cx="78" cy="98" r="6" fill="#4A3E4E"/>
         <circle cx="122" cy="98" r="6" fill="#4A3E4E"/>
         <circle cx="80" cy="96" r="2" fill="#FFFFFF"/>
@@ -519,7 +566,6 @@
       return "data:image/svg+xml;utf8," + encodeURIComponent(svgString);
     }
 
-    // 11 Profession Objects
     const JOBS_LIST = [
       "Teacher", "Chef", "Singer", "Actor", "Doctor", 
       "Vet", "Scientist", "Fashion Designer", "Nurse", "Firefighter", "Pilot"
@@ -533,13 +579,31 @@
       };
     });
 
+    // =========================================================================
+    // 3. JOB-SPECIFIC SUGGESTED QUESTIONS FOR P.5 STUDENTS
+    // =========================================================================
+    const SUGGESTED_QUESTIONS_MAP = {
+      "teacher": ["What is your favorite subject to teach?", "What tools do you use in class?", "How do you help students who are confused?", "Why did you choose to be a teacher?"],
+      "chef": ["What is your signature dish?", "What kitchen tools do you use daily?", "How do you invent new recipes?", "Is cooking at a restaurant hard work?"],
+      "singer": ["How do you practice your voice?", "What is it like to perform on stage?", "What was your most famous song?", "Do you get nervous before a concert?"],
+      "actor": ["How do you memorize long movie scripts?", "What is the best movie role you have played?", "How do you express different emotions?", "What is life like on a movie set?"],
+      "doctor": ["How do you check if a patient is sick?", "What tools do you wear around your neck?", "What should kids do to stay healthy?", "Why is medicine an important job?"],
+      "vet": ["What is the most unusual animal you treated?", "How do you know when an animal feels pain?", "What is the best part of caring for pets?", "How can I prepare to become a vet?"],
+      "scientist": ["What crazy experiments are you working on?", "What tools do you use in your laboratory?", "How do scientists make new discoveries?", "Why is science important for the future?"],
+      "fashion designer": ["How do you design new clothes?", "What fabrics and colors do you like best?", "Where do you get your creative ideas?", "What happens during a fashion show?"],
+      "nurse": ["How do you take care of sick patients?", "What is a typical day like in a hospital?", "Why is teamwork important in nursing?", "What tools do nurses use every day?"],
+      "firefighter": ["How heavy is your firefighter gear?", "What tools do you use to fight fires?", "How fast do you have to get ready for an emergency?", "What should kids do during a fire drill?"],
+      "pilot": ["How do you steer a massive airplane?", "What is your favorite destination to fly to?", "What do all the buttons in the cockpit do?", "What is the view like from above the clouds?"]
+    };
+
     let studentName = "";
     let selectedJob = null;
     let lipSyncTimer = null;
     let recognition = null;
     let isRecording = false;
+    let fallbackCounter = 0;
 
-    // --- Step 1 -> Step 2 ---
+    // --- Navigation Logic ---
     function goToStep2() {
       const name = document.getElementById("studentNameInput").value.trim();
       if (!name) {
@@ -552,7 +616,6 @@
       renderJobGrid();
     }
 
-    // Render the 11 Cute Job Cards
     function renderJobGrid() {
       const grid = document.getElementById("jobsGrid");
       grid.innerHTML = "";
@@ -572,7 +635,6 @@
       });
     }
 
-    // Start Chat Room
     function startInterview() {
       if (!selectedJob) {
         alert("Please pick a job to interview!");
@@ -584,9 +646,34 @@
       document.getElementById("avatarImg").src = selectedJob.closedMouth;
       document.getElementById("avatarTitle").innerText = selectedJob.name;
 
-      const welcomeMsg = `Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me today?`;
+      // Render job-specific suggested questions
+      renderSuggestedChips();
+
+      const welcomeMsg = `Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me about my job today?`;
       addChatMessage("ai", welcomeMsg);
       speakText(welcomeMsg);
+    }
+
+    function renderSuggestedChips() {
+      const container = document.getElementById("suggestedChips");
+      container.innerHTML = "";
+      const questions = SUGGESTED_QUESTIONS_MAP[selectedJob.id] || [
+        "What is your favorite part of your job?",
+        "What tools do you use daily?",
+        "What skills do I need to learn?",
+        "What does a normal day look like?"
+      ];
+
+      questions.forEach(q => {
+        const chip = document.createElement("button");
+        chip.className = "chip-btn";
+        chip.innerText = q;
+        chip.onclick = () => {
+          document.getElementById("userInput").value = q;
+          sendMessage();
+        };
+        container.appendChild(chip);
+      });
     }
 
     function resetApp() {
@@ -600,7 +687,7 @@
       document.getElementById("step1").classList.remove("hidden");
     }
 
-    // Chat UI Functions
+    // --- Chat Logic ---
     function addChatMessage(sender, text) {
       const box = document.getElementById("chatMessages");
       const msg = document.createElement("div");
@@ -614,7 +701,6 @@
       if (e.key === "Enter") sendMessage();
     }
 
-    // Send Message to Gemini API
     async function sendMessage() {
       const input = document.getElementById("userInput");
       const text = input.value.trim();
@@ -629,27 +715,27 @@
         addChatMessage("ai", responseText);
         speakText(responseText);
       } catch (err) {
-        console.error(err);
-        // Built-in smart fallback if no API key is provided
-        const fallbackText = getFallbackResponse(text);
+        console.error("Gemini Call Failed / Offline Fallback Mode:", err);
+        const fallbackText = getSmartInformativeFallback(text);
         addChatMessage("ai", fallbackText);
         speakText(fallbackText);
       }
     }
 
-    // Gemini API Direct Fetch Call
+    // --- Enhanced Gemini API System Prompt ---
     async function callGeminiAPI(userQuery) {
       if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-        throw new Error("No API key set");
+        throw new Error("No API key configured");
       }
 
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
       
-      const systemInstruction = `You are a friendly, professional ${selectedJob.name} being interviewed by ${studentName}, a Primary 5 student in Hong Kong (10-11 years old).
-Rules:
-1. Be extremely encouraging, cheerful, and inspiring!
-2. Use simple English suitable for primary school ESL learners.
-3. Keep answers short (2 short sentences max) so text-to-speech stays energetic and brief.`;
+      const systemInstruction = `You are playing the role of a real-life professional ${selectedJob.name} being interviewed by ${studentName}, a Primary 5 student in Hong Kong (age 10-11).
+CRITICAL INSTRUCTIONS:
+1. Directly answer the question asked with specific, realistic facts and details about being a ${selectedJob.name}. NEVER repeat static phrases like "That is a great question!" or use repetitive templates.
+2. Provide informative, educational content (e.g., tools used, daily routine, skills needed, or fun facts).
+3. Use simple, clear, inspiring English tailored for Primary 5 ESL learners.
+4. Keep answers brief (2 to 3 concise sentences maximum) so browser Text-to-Speech sounds energetic and fast.`;
 
       const payload = {
         contents: [{ role: "user", parts: [{ text: userQuery }] }],
@@ -663,21 +749,70 @@ Rules:
       });
 
       const data = await res.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text || `That is a wonderful question! Being a ${selectedJob.name} is super exciting.`;
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || getSmartInformativeFallback(userQuery);
     }
 
-    // Fallback response generator so the app works out-of-the-box before key configuration
-    function getFallbackResponse(query) {
+    // =========================================================================
+    // 4. RICH OFFLINE FALLBACK ENGINE (Prevents Repetition Without API Key)
+    // =========================================================================
+    function getSmartInformativeFallback(query) {
       const q = query.toLowerCase();
-      if (q.includes("name") || q.includes("who")) {
-        return `Hello ${studentName}! I am your friendly neighborhood ${selectedJob.name}.`;
-      } else if (q.includes("like") || q.includes("favorite") || q.includes("fun")) {
-        return `I love helping people and learning new things every day as a ${selectedJob.name}!`;
-      } else if (q.includes("hard") || q.includes("difficult")) {
-        return `Sometimes it takes practice, but working hard makes it super rewarding!`;
-      } else {
-        return `That is a great question! Being a ${selectedJob.name} is a fantastic job full of fun challenges.`;
+      const j = selectedJob.id;
+
+      // Keyword based dynamic responses
+      if (q.includes("tool") || q.includes("equipment") || q.includes("wear") || q.includes("use")) {
+        const toolsMap = {
+          teacher: "I use interactive whiteboards, colorful lesson plans, and textbooks to make learning exciting!",
+          chef: "My essential tools are sharp chef knives, heavy frying pans, and measuring spoons for precise baking.",
+          singer: "My main tools are a high-quality microphone, audio headphones, and my vocal cords which I warm up daily!",
+          actor: "I use script highlighters to memorize dialogue, costume props, and makeup to transform into different characters.",
+          doctor: "I rely on my stethoscope to listen to your heart and a otoscope to inspect ears and throat health.",
+          vet: "I use small stethoscopes, bandages, and special thermometers designed to check dogs, cats, and rabbits comfortably.",
+          scientist: "I work with test tubes, microscopes, safety goggles, and lab notebooks to document discoveries.",
+          "fashion designer": "My workspace is filled with sketchbooks, measuring tapes, sharp fabric scissors, and sewing machines.",
+          nurse: "I use blood pressure cuffs, thermometers, medical charts, and syringes to administer medicine safely.",
+          firefighter: "I wear heat-resistant turn-out gear, a safety helmet, and carry fire hoses and rescue axes.",
+          pilot: "I operate flight control sticks, navigation displays, radar instruments, and radios in the airplane cockpit."
+        };
+        return toolsMap[j] || `As a ${selectedJob.name}, I use specialized equipment every day to do my job safely and effectively!`;
       }
+
+      if (q.includes("day") || q.includes("routine") || q.includes("time") || q.includes("schedule")) {
+        const dayMap = {
+          teacher: "My morning starts with preparing fun classroom activities, teaching subjects like English, and marking assignments.",
+          chef: "I start early by inspecting fresh ingredients at the market, prepping vegetables, and cooking hot meals during lunch rush.",
+          singer: "My day involves vocal exercises in the morning, band rehearsals in the afternoon, and recording in the studio.",
+          actor: "A typical day includes reading scripts, rehearsing scenes with directors, and filming under bright studio lights.",
+          doctor: "I conduct morning rounds to check on admitted hospital patients and examine walk-in clinic patients in the afternoon.",
+          vet: "I perform health checkups on puppies in the morning, give vaccinations, and perform surgeries after lunch.",
+          scientist: "I spend my mornings setting up lab experiments and my afternoons analyzing data on my computer.",
+          "fashion designer": "I sketch new clothing designs in the morning, select fabric swatches, and fit outfits on models.",
+          nurse: "I start my shift taking patient vital signs, delivering medicine, and comforting people who feel unwell.",
+          firefighter: "We inspect our fire engines every morning, do physical training drills, and stay ready for emergency calls.",
+          pilot: "Before every flight, I review weather reports, perform pre-flight aircraft inspections, and map our flight path."
+        };
+        return dayMap[j] || `Every day brings new challenges! I plan my schedule carefully to serve people well.`;
+      }
+
+      if (q.includes("skill") || q.includes("study") || q.includes("learn") || q.includes("become")) {
+        return `To become a great ${selectedJob.name}, ${studentName}, you should practice teamwork, stay curious, and keep improving your English and problem-solving skills!`;
+      }
+
+      if (q.includes("favorite") || q.includes("like") || q.includes("love") || q.includes("best")) {
+        return `My favorite part of being a ${selectedJob.name} is making a positive difference for others and learning something new every single day!`;
+      }
+
+      // Varied non-repeating dynamic trivia responses
+      const variedFacts = [
+        `Did you know, ${studentName}? Being a ${selectedJob.name} requires lots of practice, but seeing happy people makes it completely worth it!`,
+        `Working as a ${selectedJob.name} is super creative. We always have to solve interesting problems under pressure.`,
+        `I love answering your questions! A great tip for Primary 5 students interested in becoming a ${selectedJob.name} is to read lots of books!`,
+        `Communication is key in my job. Speaking clear English helps me share ideas with teammates all around the world.`
+      ];
+
+      const chosen = variedFacts[fallbackCounter % variedFacts.length];
+      fallbackCounter++;
+      return chosen;
     }
 
     // --- Web Speech TTS & Talking Lip-Sync ---
@@ -691,7 +826,6 @@ Rules:
       utterance.lang = 'en-US';
       utterance.rate = 0.95;
 
-      // Start animation immediately
       startLipSync();
 
       utterance.onend = () => stopLipSync();
