@@ -1,617 +1,1083 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Career Interview - Hong Kong P.5</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #4F46E5;
-      --primary-hover: #4338CA;
-      --accent: #F59E0B;
-      --bg-color: #EEF2FF;
-      --card-bg: #FFFFFF;
-      --text-color: #1F2937;
-      --text-muted: #6B7280;
-      --border-radius: 20px;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Career Interviewer for HK P.5 Students</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      width: 100%;
-      background: var(--card-bg);
-      padding: 1rem 2rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-family: 'Fredoka', sans-serif;
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-      padding: 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--border-radius);
-      padding: 2rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1.5rem;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* STEP 1: Name Input */
-    .step-title {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .step-desc {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .input-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      min-width: 250px;
-      padding: 0.8rem 1.2rem;
-      border: 2px solid #E5E7EB;
-      border-radius: 12px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input[type="text"]:focus {
-      border-color: var(--primary);
-    }
-
-    .btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.8rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: transform 0.1s, background-color 0.2s;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn-secondary {
-      background-color: #E5E7EB;
-      color: var(--text-color);
-    }
-
-    .btn-secondary:hover {
-      background-color: #D1D5DB;
-    }
-
-    /* STEP 2: Job Selection Grid */
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .job-card {
-      border: 2px solid #E5E7EB;
-      border-radius: 16px;
-      padding: 1rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: white;
-    }
-
-    .job-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
-    }
-
-    .job-card.selected {
-      border-color: var(--primary);
-      background-color: #EEF2FF;
-    }
-
-    .job-card img {
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 0.8rem;
-      border: 3px solid #E5E7EB;
-    }
-
-    .job-card h3 {
-      font-size: 1.1rem;
-      color: var(--text-color);
-    }
-
-    /* STEP 3: Chatroom & Avatar Display */
-    .chat-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 1.5rem;
-      height: 100%;
-    }
-
-    @media (max-width: 768px) {
-      .chat-layout {
-        grid-template-columns: 1fr;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+            }
+          }
+        }
       }
     }
+  </script>
 
-    .avatar-panel {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #F9FAFB;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 2px solid #F3F4F6;
+  <style>
+    /* Custom animations for child-friendly micro-interactions */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .speaking-pulse {
+      animation: pulse-ring 1.4s infinite ease-in-out;
     }
 
-    .avatar-wrapper {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      margin-bottom: 1rem;
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .float-avatar {
+      animation: float-slow 3s infinite ease-in-out;
     }
 
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid var(--primary);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    /* Scrollbar customization */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
     }
-
-    .status-badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      background: #E5E7EB;
-      color: var(--text-muted);
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
     }
-
-    .status-badge.speaking {
-      background: #D1FAE5;
-      color: #059669;
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
     }
-
-    .status-badge.listening {
-      background: #FEF3C7;
-      color: #D97706;
-    }
-
-    .chat-panel {
-      display: flex;
-      flex-direction: column;
-      height: 480px;
-    }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      background: #FAFAFA;
-    }
-
-    .message {
-      max-width: 80%;
-      padding: 0.8rem 1rem;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      background: var(--primary);
-      color: white;
-      border-bottom-right-radius: 4px;
-    }
-
-    .message.ai {
-      align-self: flex-start;
-      background: white;
-      border: 1px solid #E5E7EB;
-      color: var(--text-color);
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .chat-controls {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-mic {
-      background-color: #EF4444;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      padding: 0;
-      flex-shrink: 0;
-    }
-
-    .btn-mic.recording {
-      animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
   </style>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-sky-200">
 
-  <header>
-    <h1>🎓 AI Career Interview</h1>
-    <button class="btn btn-secondary" onclick="resetApp()">Start Over</button>
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="goToStep(1)">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-white text-xl shadow-md shadow-sky-200">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg md:text-xl text-slate-900 leading-tight">
+            AI Career Interview
+          </h1>
+          <p class="text-xs text-sky-600 font-medium">Hong Kong Primary 5 English Practice</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Settings Modal Trigger -->
+        <button onclick="toggleSettingsModal(true)" title="API Settings" class="min-h-[44px] px-3.5 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition flex items-center gap-2 border border-slate-200">
+          <i class="fa-solid fa-key text-amber-500"></i>
+          <span class="hidden sm:inline">API Key</span>
+        </button>
+
+        <!-- Teacher's Guide Trigger -->
+        <button onclick="toggleGuideModal(true)" title="Teacher Guide" class="min-h-[44px] px-3.5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span class="hidden sm:inline">Teacher's Guide</span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-    
-    <!-- STEP 1: Name Input -->
-    <div id="step1" class="card">
-      <h2 class="step-title">Step 1: Enter Your Name</h2>
-      <p class="step-desc">Welcome! What is your name?</p>
-      <div class="input-group">
-        <input type="text" id="studentNameInput" placeholder="e.g. Alex" />
-        <button class="btn" onclick="goToStep2()">Next &rarr;</button>
-      </div>
-    </div>
 
-    <!-- STEP 2: Job Selection -->
-    <div id="step2" class="card hidden">
-      <h2 class="step-title">Step 2: Pick a Career to Interview</h2>
-      <p class="step-desc">Choose who you would like to interview today:</p>
-      <div class="jobs-grid" id="jobsGrid"></div>
-      <div style="margin-top: 1.5rem; text-align: right;">
-        <button class="btn" onclick="startInterview()">Start Interview &rarr;</button>
-      </div>
-    </div>
+  <!-- ================= MAIN APP CONTAINER ================= -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 flex flex-col">
 
-    <!-- STEP 3: Chatroom & Talking Avatar -->
-    <div id="step3" class="card hidden">
-      <div class="chat-layout">
-        <div class="avatar-panel">
-          <div class="avatar-wrapper">
-            <img id="avatarImg" class="avatar-img" src="" alt="Avatar" />
-          </div>
-          <h3 id="avatarTitle" style="margin-bottom: 0.5rem;">Job Title</h3>
-          <span id="statusBadge" class="status-badge">AI Idle</span>
+    <!-- STEP PROGRESS BAR -->
+    <div class="mb-6 max-w-xl mx-auto w-full">
+      <div class="flex items-center justify-between relative">
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 -z-10 rounded-full"></div>
+        <div id="step-line" class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-sky-500 -z-10 rounded-full transition-all duration-300 w-0"></div>
+
+        <!-- Step 1 Indicator -->
+        <div id="step-node-1" class="flex flex-col items-center gap-1">
+          <div class="w-9 h-9 rounded-full bg-sky-500 text-white font-bold flex items-center justify-center text-sm ring-4 ring-slate-100 shadow-sm transition">1</div>
+          <span class="text-xs font-semibold text-sky-600">Your Name</span>
         </div>
-
-        <div class="chat-panel">
-          <div class="chat-messages" id="chatMessages"></div>
-          <div class="chat-controls">
-            <button id="micBtn" class="btn btn-mic" onclick="toggleSTT()" title="Tap to Speak">🎤</button>
-            <input type="text" id="userInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)" />
-            <button class="btn" onclick="sendMessage()">Send</button>
-          </div>
+        <!-- Step 2 Indicator -->
+        <div id="step-node-2" class="flex flex-col items-center gap-1">
+          <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm ring-4 ring-slate-100 shadow-sm transition">2</div>
+          <span class="text-xs font-semibold text-slate-500">Choose Career</span>
+        </div>
+        <!-- Step 3 Indicator -->
+        <div id="step-node-3" class="flex flex-col items-center gap-1">
+          <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm ring-4 ring-slate-100 shadow-sm transition">3</div>
+          <span class="text-xs font-semibold text-slate-500">Interview Room</span>
         </div>
       </div>
     </div>
 
+
+    <!-- ================= STEP 1: ENTER NAME ================= -->
+    <section id="step-1-screen" class="flex-1 flex items-center justify-center py-4">
+      <div class="bg-white rounded-3xl p-6 md:p-10 max-w-md w-full border border-slate-200 shadow-xl text-center space-y-6">
+        <div class="w-20 h-20 bg-sky-100 text-sky-600 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-inner">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        
+        <div>
+          <h2 class="font-display text-2xl font-bold text-slate-900">Welcome, Student!</h2>
+          <p class="text-slate-500 text-sm mt-1">Please enter your name to start your English AI Interview.</p>
+        </div>
+
+        <form onsubmit="handleNameSubmit(event)" class="space-y-4">
+          <div class="text-left">
+            <label for="student-name-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Student Name</label>
+            <input type="text" id="student-name-input" required placeholder="e.g. Alex Chan" 
+              class="w-full px-4 py-3.5 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition text-slate-800 font-medium placeholder:text-slate-400 text-base min-h-[48px]" />
+          </div>
+
+          <button type="submit" class="w-full min-h-[48px] py-3.5 px-6 bg-sky-500 hover:bg-sky-600 active:scale-[0.99] text-white font-bold rounded-2xl transition shadow-lg shadow-sky-200 flex items-center justify-center gap-2 text-base">
+            <span>Next: Choose Career</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+
+    <!-- ================= STEP 2: CHOOSE CAREER ================= -->
+    <section id="step-2-screen" class="hidden flex-1 flex flex-col space-y-6">
+      <div class="text-center max-w-xl mx-auto">
+        <h2 class="font-display text-2xl md:text-3xl font-extrabold text-slate-900">Select a Professional to Interview</h2>
+        <p class="text-slate-600 text-sm mt-1">Who would you like to speak with today, <span id="display-student-name" class="font-bold text-sky-600">Student</span>?</p>
+      </div>
+
+      <!-- Career Grid -->
+      <div id="career-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 max-w-5xl mx-auto w-full">
+        <!-- JS renders career cards here -->
+      </div>
+
+      <div class="flex justify-center pt-2">
+        <button onclick="goToStep(1)" class="min-h-[44px] px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl transition flex items-center gap-2">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ================= STEP 3: INTERVIEW CHAT ROOM ================= -->
+    <section id="step-3-screen" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT COLUMN (Desktop) / TOP (Mobile): AVATAR & CONTROLS -->
+      <div class="md:col-span-5 lg:col-span-4 bg-white rounded-3xl p-5 border border-slate-200 shadow-md flex flex-col items-center text-center space-y-4">
+        
+        <!-- Job Badge & Student Info -->
+        <div class="w-full flex items-center justify-between text-xs font-semibold text-slate-500 border-b border-slate-100 pb-3">
+          <span class="flex items-center gap-1.5 text-sky-600">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span id="chat-student-name">Alex</span>
+          </span>
+          <button onclick="goToStep(2)" class="text-xs text-slate-500 hover:text-sky-600 transition flex items-center gap-1">
+            <i class="fa-solid fa-arrows-rotate"></i> Change Job
+          </button>
+        </div>
+
+        <!-- AI Status Pill -->
+        <div id="ai-status-pill" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200 transition-all">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+          <span id="ai-status-text">AI Status: Idle</span>
+        </div>
+
+        <!-- Animated Avatar Container -->
+        <div class="relative group my-2">
+          <!-- Outer Pulsing Glow -->
+          <div id="avatar-glow" class="absolute -inset-2 bg-gradient-to-r from-sky-400 to-indigo-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+          
+          <!-- Avatar Display Box -->
+          <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-b from-slate-50 to-sky-50 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden float-avatar">
+            <!-- Dynamic SVG Avatar rendered here -->
+            <div id="avatar-svg-wrapper" class="w-full h-full p-2 flex items-center justify-center">
+              <!-- SVG inserted by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Career Title & Description -->
+        <div>
+          <h3 id="avatar-job-title" class="font-display text-xl font-bold text-slate-900">Astronaut</h3>
+          <p id="avatar-job-desc" class="text-xs text-slate-500 mt-1 max-w-xs">Ask me anything about living in space, science, and space rockets!</p>
+        </div>
+
+        <!-- Suggested Questions for HK P.5 Students -->
+        <div class="w-full text-left pt-2 border-t border-slate-100">
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <i class="fa-solid fa-lightbulb text-amber-400"></i>
+            <span>Need Ideas? Click a Question:</span>
+          </p>
+          <div id="suggested-questions" class="flex flex-col gap-1.5">
+            <!-- JS populates suggested questions -->
+          </div>
+        </div>
+      </div>
+
+
+      <!-- RIGHT COLUMN (Desktop) / BOTTOM (Mobile): CHAT & SPEECH INPUT -->
+      <div class="md:col-span-7 lg:col-span-8 bg-white rounded-3xl border border-slate-200 shadow-md flex flex-col h-[520px] md:h-[600px] overflow-hidden">
+        
+        <!-- Chat History Header -->
+        <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Interview Log</span>
+          </div>
+          <button onclick="clearChatLog()" class="text-xs font-semibold text-slate-400 hover:text-slate-600 transition">
+            <i class="fa-solid fa-trash-can mr-1"></i> Clear Chat
+          </button>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="chat-messages" class="flex-1 p-4 md:p-5 overflow-y-auto space-y-4 custom-scrollbar bg-slate-50/50">
+          <!-- Chat messages rendered dynamically -->
+        </div>
+
+        <!-- Live Speech Recognition Feedback Badge -->
+        <div id="stt-feedback" class="hidden px-4 py-2 bg-sky-50 border-t border-sky-100 text-xs font-medium text-sky-700 flex items-center justify-between animate-pulse">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-microphone text-sky-500"></i>
+            <span id="stt-feedback-text">Listening... Speak now into your microphone.</span>
+          </span>
+          <button onclick="stopSpeechRecognition()" class="text-sky-800 underline font-bold hover:text-sky-900">Cancel</button>
+        </div>
+
+        <!-- Input Control Panel -->
+        <div class="p-3 md:p-4 bg-white border-t border-slate-200 space-y-3">
+          
+          <form onsubmit="handleUserMessageSend(event)" class="flex items-center gap-2">
+            <!-- Mic Button for STT -->
+            <button type="button" id="mic-btn" onclick="toggleSpeechRecognition()" title="Tap to Speak"
+              class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-sky-500 hover:bg-sky-600 active:scale-95 text-white flex-shrink-0 flex items-center justify-center text-xl transition shadow-md shadow-sky-200 min-h-[44px] min-w-[44px]">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+
+            <!-- Text Input -->
+            <input type="text" id="user-input-field" placeholder="Type your question..." 
+              class="flex-1 px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition text-slate-800 text-sm md:text-base min-h-[44px]" />
+
+            <!-- Send Button -->
+            <button type="submit" id="send-btn" title="Send Question"
+              class="px-5 py-3 min-h-[44px] bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm shadow-sm">
+              <span class="hidden sm:inline">Send</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+
+          <p class="text-[11px] text-center text-slate-400">
+            <i class="fa-solid fa-circle-info mr-1"></i> Speak clearly in English or type your question above!
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= SETTINGS MODAL (API KEY) ================= -->
+  <div id="settings-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-slate-100 space-y-5 animate-in fade-in zoom-in duration-200">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-display font-bold text-lg text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-key text-amber-500"></i>
+          <span>Gemini API Settings</span>
+        </h3>
+        <button onclick="toggleSettingsModal(false)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-600 leading-relaxed">
+        The app can use a custom Google Gemini API Key. If left blank, it uses the embedded system key key placeholder.
+      </p>
+
+      <div>
+        <label for="api-key-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Gemini API Key</label>
+        <input type="password" id="api-key-input" placeholder="AIzaSy..." 
+          class="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-sky-500 outline-none text-sm font-mono" />
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="saveApiKey()" class="flex-1 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-xl transition min-h-[44px]">
+          Save Key
+        </button>
+        <button onclick="toggleSettingsModal(false)" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition min-h-[44px]">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 
+
+  <!-- ================= TEACHER'S HOSTING GUIDE MODAL ================= -->
+  <div id="guide-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl border border-slate-100 max-h-[90vh] flex flex-col space-y-4">
+      
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900">Host FREE on GitHub Pages in 5 Minutes</h3>
+        </div>
+        <button onclick="toggleGuideModal(false)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto space-y-4 custom-scrollbar text-xs md:text-sm text-slate-600 pr-1">
+        <p class="font-semibold text-slate-800">
+          Teachers can easily host this interactive web application for free so students can access it on iPads, Chromebooks, or smartphones:
+        </p>
+
+        <div class="space-y-3">
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">1</span>
+            <div>
+              <p class="font-bold text-slate-800">Create GitHub Account & Repository</p>
+              <p class="text-slate-500 mt-0.5">Go to <a href="https://github.com" target="_blank" class="text-indigo-600 underline">github.com</a>, sign in, click <strong>"New Repository"</strong>, name it <code>p5-ai-career</code>, set to <strong>Public</strong>, and click <strong>Create</strong>.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+            <div>
+              <p class="font-bold text-slate-800">Upload <code>index.html</code></p>
+              <p class="text-slate-500 mt-0.5">Click <strong>"uploading an existing file"</strong>, drag and drop this <code>index.html</code> file, and click the green <strong>"Commit changes"</strong> button.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">3</span>
+            <div>
+              <p class="font-bold text-slate-800">Enable GitHub Pages</p>
+              <p class="text-slate-500 mt-0.5">In your repo, click <strong>Settings</strong> &rarr; <strong>Pages</strong> (on left sidebar). Under <em>Branch</em>, select <code>main</code> and folder <code>/ (root)</code>, then click <strong>Save</strong>.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex gap-3">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">4</span>
+            <div>
+              <p class="font-bold text-slate-800">Get Your Live URL</p>
+              <p class="text-slate-500 mt-0.5">Wait ~1 minute. Refresh the page to see your live URL: <code>https://your-username.github.io/p5-ai-career/</code>.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-sky-50 rounded-2xl border border-sky-200 flex gap-3">
+            <span class="w-7 h-7 rounded-full bg-sky-500 text-white font-bold flex items-center justify-center shrink-0">5</span>
+            <div>
+              <p class="font-bold text-sky-900">Share with P.5 Students</p>
+              <p class="text-sky-700 mt-0.5">Copy the URL or convert it into a QR code for students to scan on their school tablets!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <button onclick="toggleGuideModal(false)" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition min-h-[44px]">
+          Got it, thanks!
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
   <script>
-    // =========================================================================
-    // 1. GEMINI API KEY CONFIGURATION
-    // Replace the string below with your Gemini API Key
-    // =========================================================================
-    const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+    /**
+     * GEMINI API KEY CONFIGURATION
+     * Leave empty to use runtime canvas key or let students enter custom key in API settings modal.
+     */
+    const GEMINI_API_KEY = "";
 
-    // =========================================================================
-    // 2. CAREER & PHOTO CONFIGURATION
-    // You can replace closedMouth & openMouth URLs with your own photo links!
-    // =========================================================================
-    const JOBS = [
-      {
+    /**
+     * CAREERS DATA (10 Professions tailored for Hong Kong Primary 5 Curriculum)
+     */
+    const CAREERS = {
+      astronaut: {
         id: "astronaut",
-        name: "Astronaut",
-        closedMouth: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&auto=format&fit=crop",
-        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+        title: "Astronaut",
+        emoji: "🧑‍🚀",
+        color: "from-purple-500 to-indigo-600",
+        desc: "Explores space, drives rockets, and conducts science experiments.",
+        questions: [
+          "What is your daily routine in space?",
+          "What subjects should I study to be an astronaut?",
+          "What does space food taste like?"
+        ]
       },
-      {
+      firefighter: {
         id: "firefighter",
-        name: "Firefighter",
-        closedMouth: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&auto=format&fit=crop",
-        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+        title: "Firefighter",
+        emoji: "👨‍🚒",
+        color: "from-red-500 to-amber-600",
+        desc: "Saves lives, puts out fires, and protects our Hong Kong community.",
+        questions: [
+          "What is the hardest part of your job?",
+          "How fast can you get ready for an emergency?",
+          "What equipment do you wear to stay safe?"
+        ]
       },
-      {
-        id: "chef",
-        name: "Chef",
-        closedMouth: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&auto=format&fit=crop",
-        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
-      },
-      {
+      scientist: {
         id: "scientist",
-        name: "Scientist",
-        closedMouth: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&auto=format&fit=crop",
-        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+        title: "Scientist",
+        emoji: "👩‍🔬",
+        color: "from-emerald-500 to-teal-600",
+        desc: "Invents new things, solves mysteries, and cures diseases.",
+        questions: [
+          "Why did you choose to become a scientist?",
+          "What exciting experiments are you working on?",
+          "How can I practice science at home?"
+        ]
+      },
+      chef: {
+        id: "chef",
+        title: "Chef",
+        emoji: "👨‍🍳",
+        color: "from-amber-500 to-orange-600",
+        desc: "Cooks delicious meals and creates fun recipes.",
+        questions: [
+          "What is your favorite dish to cook?",
+          "How do you create a new recipe?",
+          "What skills do I need to be a top chef?"
+        ]
+      },
+      teacher: {
+        id: "teacher",
+        title: "Teacher",
+        emoji: "👩‍🏫",
+        color: "from-sky-500 to-blue-600",
+        desc: "Inspires students and teaches exciting knowledge every day.",
+        questions: [
+          "What makes teaching primary students fun?",
+          "How do you prepare your lessons?",
+          "What advice do you have for P.5 students?"
+        ]
+      },
+      singer: {
+        id: "singer",
+        title: "Singer",
+        emoji: "🎤",
+        color: "from-pink-500 to-rose-600",
+        desc: "Performs music on stage and writes inspiring songs.",
+        questions: [
+          "How do you prepare before a big concert?",
+          "How do you get ideas for writing new songs?",
+          "What should I do if I get nervous on stage?"
+        ]
+      },
+      pilot: {
+        id: "pilot",
+        title: "Pilot",
+        emoji: "🧑‍✈️",
+        color: "from-blue-600 to-slate-700",
+        desc: "Flies airplanes across the world connecting countries.",
+        questions: [
+          "What is it like flying above the clouds?",
+          "How do pilots navigate at night?",
+          "Which country is your favorite to fly to?"
+        ]
+      },
+      vet: {
+        id: "vet",
+        title: "Veterinarian",
+        emoji: "👩‍⚕️",
+        color: "from-teal-400 to-emerald-600",
+        desc: "Takes care of sick animals and keeps pets healthy.",
+        questions: [
+          "What is the most interesting animal you treated?",
+          "How can kids help look after their pets?",
+          "What is a typical day like at the vet clinic?"
+        ]
+      },
+      gamedev: {
+        id: "gamedev",
+        title: "Game Developer",
+        emoji: "👨‍💻",
+        color: "from-violet-600 to-fuchsia-600",
+        desc: "Codes exciting video games, designs levels and characters.",
+        questions: [
+          "How are computer games made?",
+          "What programming languages should beginners learn?",
+          "How do you design cool game characters?"
+        ]
+      },
+      doctor: {
+        id: "doctor",
+        title: "Doctor",
+        emoji: "🧑‍⚕️",
+        color: "from-cyan-500 to-blue-600",
+        desc: "Helps patients feel better and promotes good health.",
+        questions: [
+          "Why is eating healthy so important for students?",
+          "What tools do you use to check patients?",
+          "What is the best part of helping people?"
+        ]
       }
-    ];
+    };
 
-    let studentName = "";
-    let selectedJob = null;
-    let lipSyncTimer = null;
-    let recognition = null;
-    let isRecording = false;
+    /**
+     * GLOBAL STATE MANAGEMENT
+     */
+    const state = {
+      studentName: "",
+      selectedCareer: "astronaut",
+      customApiKey: localStorage.getItem("gemini_api_key") || "",
+      chatHistory: [],
+      aiStatus: "idle", // 'idle' | 'listening' | 'thinking' | 'speaking'
+      isSpeechTalking: false,
+      lipSyncInterval: null,
+      mouthOpen: false,
+      speechRecognition: null,
+      isRecognizing: false
+    };
 
-    // --- Step Navigation ---
-    function goToStep2() {
-      const name = document.getElementById("studentNameInput").value.trim();
-      if (!name) {
-        alert("Please enter your name!");
-        return;
+    // Initialize application on window load
+    window.onload = function() {
+      renderCareerCards();
+      setupSpeechRecognition();
+      
+      // Auto fill API key input if stored
+      if (state.customApiKey) {
+        document.getElementById("api-key-input").value = state.customApiKey;
       }
-      studentName = name;
-      document.getElementById("step1").classList.add("hidden");
-      document.getElementById("step2").classList.remove("hidden");
-      renderJobGrid();
+    };
+
+    /**
+     * STEP NAVIGATION LOGIC
+     */
+    function goToStep(stepNumber) {
+      // Hide all steps
+      document.getElementById("step-1-screen").classList.add("hidden");
+      document.getElementById("step-2-screen").classList.add("hidden");
+      document.getElementById("step-3-screen").classList.add("hidden");
+
+      // Update progress line & nodes
+      const line = document.getElementById("step-line");
+      if (stepNumber === 1) line.style.width = "0%";
+      else if (stepNumber === 2) line.style.width = "50%";
+      else if (stepNumber === 3) line.style.width = "100%";
+
+      for (let i = 1; i <= 3; i++) {
+        const node = document.getElementById(`step-node-${i}`).children[0];
+        if (i <= stepNumber) {
+          node.classList.remove("bg-slate-200", "text-slate-600");
+          node.classList.add("bg-sky-500", "text-white");
+        } else {
+          node.classList.remove("bg-sky-500", "text-white");
+          node.classList.add("bg-slate-200", "text-slate-600");
+        }
+      }
+
+      // Show requested step
+      document.getElementById(`step-${stepNumber}-screen`).classList.remove("hidden");
     }
 
-    function renderJobGrid() {
-      const grid = document.getElementById("jobsGrid");
-      grid.innerHTML = "";
-      JOBS.forEach(job => {
-        const card = document.createElement("div");
-        card.className = `job-card ${selectedJob?.id === job.id ? 'selected' : ''}`;
-        card.onclick = () => {
-          selectedJob = job;
-          document.querySelectorAll('.job-card').forEach(c => c.classList.remove('selected'));
-          card.classList.add('selected');
-        };
+    /**
+     * STEP 1: NAME SUBMISSION
+     */
+    function handleNameSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById("student-name-input");
+      const name = input.value.trim();
+      if (!name) return;
+
+      state.studentName = name;
+      document.getElementById("display-student-name").textContent = name;
+      document.getElementById("chat-student-name").textContent = name;
+
+      goToStep(2);
+    }
+
+    /**
+     * STEP 2: RENDER CAREER CARDS
+     */
+    function renderCareerCards() {
+      const container = document.getElementById("career-grid");
+      container.innerHTML = "";
+
+      Object.values(CAREERS).forEach(career => {
+        const card = document.createElement("button");
+        card.className = `p-4 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all duration-300 text-left flex flex-col items-center text-center group cursor-pointer hover:-translate-y-1 min-h-[160px] justify-between`;
+        card.onclick = () => selectCareer(career.id);
+
         card.innerHTML = `
-          <img src="${job.closedMouth}" alt="${job.name}" />
-          <h3>${job.name}</h3>
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr ${career.color} flex items-center justify-center text-2xl text-white shadow-md group-hover:scale-110 transition duration-300">
+            ${career.emoji}
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-sky-600 transition">${career.title}</h4>
+            <p class="text-[11px] text-slate-500 line-clamp-2 mt-1 leading-tight">${career.desc}</p>
+          </div>
+          <span class="mt-2 text-xs font-bold text-sky-600 opacity-0 group-hover:opacity-100 transition">Interview Me &rarr;</span>
         `;
-        grid.appendChild(card);
+
+        container.appendChild(card);
       });
     }
 
-    function startInterview() {
-      if (!selectedJob) {
-        alert("Please select a career to interview!");
-        return;
-      }
-      document.getElementById("step2").classList.add("hidden");
-      document.getElementById("step3").classList.remove("hidden");
+    function selectCareer(careerId) {
+      state.selectedCareer = careerId;
+      const career = CAREERS[careerId];
 
-      document.getElementById("avatarImg").src = selectedJob.closedMouth;
-      document.getElementById("avatarTitle").innerText = selectedJob.name;
+      // Update Chatroom Details
+      document.getElementById("avatar-job-title").textContent = career.title;
+      document.getElementById("avatar-job-desc").textContent = career.desc;
 
-      addChatMessage("ai", `Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me today?`);
-      speakText(`Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me today?`);
+      // Render Suggested Questions
+      const questionsContainer = document.getElementById("suggested-questions");
+      questionsContainer.innerHTML = "";
+      career.questions.forEach(q => {
+        const btn = document.createElement("button");
+        btn.className = "text-left text-xs p-2.5 rounded-xl bg-slate-100 hover:bg-sky-50 hover:text-sky-700 text-slate-700 font-medium transition border border-slate-200 flex items-center justify-between group";
+        btn.onclick = () => {
+          document.getElementById("user-input-field").value = q;
+          handleUserMessageSend(new Event('submit'));
+        };
+        btn.innerHTML = `
+          <span>"${q}"</span>
+          <i class="fa-solid fa-circle-arrow-right text-slate-400 group-hover:text-sky-500 transition"></i>
+        `;
+        questionsContainer.appendChild(btn);
+      });
+
+      // Clear & Initialize Chat
+      state.chatHistory = [];
+      renderAvatar(false); // Closed mouth
+      renderChatMessages();
+
+      // Initial AI greeting message
+      const greeting = `Hello ${state.studentName}! I am a professional ${career.title}. It is wonderful to meet you today! What question would you like to ask me?`;
+      addChatMessage("model", greeting);
+      speakTTS(greeting);
+
+      goToStep(3);
     }
 
-    function resetApp() {
-      window.speechSynthesis.cancel();
-      stopLipSync();
-      studentName = "";
-      selectedJob = null;
-      document.getElementById("chatMessages").innerHTML = "";
-      document.getElementById("step3").classList.add("hidden");
-      document.getElementById("step2").classList.add("hidden");
-      document.getElementById("step1").classList.remove("hidden");
-    }
 
-    // --- Chat Logic ---
-    function addChatMessage(sender, text) {
-      const box = document.getElementById("chatMessages");
-      const msg = document.createElement("div");
-      msg.className = `message ${sender}`;
-      msg.innerText = text;
-      box.appendChild(msg);
-      box.scrollTop = box.scrollHeight;
-    }
-
-    function handleKeyPress(e) {
-      if (e.key === "Enter") sendMessage();
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const text = input.value.trim();
-      if (!text) return;
-
-      input.value = "";
-      addChatMessage("user", text);
-
-      updateStatus("AI Thinking...", "listening");
-
-      try {
-        const responseText = await callGeminiAPI(text);
-        addChatMessage("ai", responseText);
-        speakText(responseText);
-      } catch (err) {
-        console.error(err);
-        addChatMessage("ai", "Sorry, I had trouble responding. Please check your API key.");
-        updateStatus("AI Idle", "idle");
-      }
-    }
-
-    // --- Gemini API Call ---
-    async function callGeminiAPI(userQuery) {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    /**
+     * DYNAMIC SVG TALKING AVATAR GENERATOR (No Heavy Video Assets)
+     * Renders customized SVG graphics based on career, toggling mouth state for lip-sync.
+     */
+    function renderAvatar(isOpenMouth) {
+      const wrapper = document.getElementById("avatar-svg-wrapper");
+      const careerId = state.selectedCareer || "astronaut";
       
-      const systemInstruction = `You are a professional ${selectedJob.name} being interviewed by ${studentName}, a Primary 5 student in Hong Kong (10-11 years old).
-Rules:
-1. Be encouraging, friendly, and inspiring.
-2. Use simple English suitable for primary school ESL learners.
-3. Keep answers brief (2-3 short sentences max) so text-to-speech avatar playback sounds natural.`;
-
-      const payload = {
-        contents: [{ role: "user", parts: [{ text: userQuery }] }],
-        systemInstruction: { parts: [{ text: systemInstruction }] }
+      // Color themes per job
+      const themes = {
+        astronaut: { hat: "#3b82f6", outfit: "#1e293b", bg: "#e0f2fe" },
+        firefighter: { hat: "#ef4444", outfit: "#b91c1c", bg: "#fee2e2" },
+        scientist: { hat: "#10b981", outfit: "#047857", bg: "#d1fae5" },
+        chef: { hat: "#f8fafc", outfit: "#f59e0b", bg: "#fef3c7" },
+        teacher: { hat: "#0284c7", outfit: "#0369a1", bg: "#e0f2fe" },
+        singer: { hat: "#ec4899", outfit: "#be185d", bg: "#fce7f3" },
+        pilot: { hat: "#1e3a8a", outfit: "#172554", bg: "#dbeafe" },
+        vet: { hat: "#14b8a6", outfit: "#0f766e", bg: "#ccfbf1" },
+        gamedev: { hat: "#7c3aed", outfit: "#5b21b6", bg: "#ede9fe" },
+        doctor: { hat: "#06b6d4", outfit: "#0e7490", bg: "#cffaff" }
       };
 
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+      const theme = themes[careerId] || themes.astronaut;
 
-      const data = await res.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text || "Thank you for that question!";
+      // Closed vs Open Mouth SVG snippet
+      const mouthSvg = isOpenMouth
+        ? `<ellipse cx="50" cy="65" rx="7" ry="9" fill="#e53e3e" />
+           <path d="M 45 60 Q 50 64 55 60" fill="#ffffff" />
+           <path d="M 46 68 Q 50 72 54 68" fill="#fc8181" />`
+        : `<path d="M 42 64 Q 50 71 58 64" stroke="#2d3748" stroke-width="3" stroke-linecap="round" fill="none" />`;
+
+      const svgContent = `
+        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
+          <!-- Background Circle -->
+          <circle cx="50" cy="50" r="48" fill="${theme.bg}" />
+          
+          <!-- Outfit Body -->
+          <path d="M 22 92 C 22 75, 78 75, 78 92 Z" fill="${theme.outfit}" />
+          <!-- Shirt Collar -->
+          <polygon points="50,76 42,88 58,88" fill="#ffffff" />
+
+          <!-- Face -->
+          <circle cx="50" cy="52" r="24" fill="#fde047" />
+          
+          <!-- Eyes -->
+          <circle cx="42" cy="48" r="3" fill="#1e293b" />
+          <circle cx="58" cy="48" r="3" fill="#1e293b" />
+          <circle cx="43" cy="47" r="1" fill="#ffffff" />
+          <circle cx="59" cy="47" r="1" fill="#ffffff" />
+
+          <!-- Cheeks -->
+          <circle cx="36" cy="54" r="3" fill="#fca5a5" opacity="0.6" />
+          <circle cx="64" cy="54" r="3" fill="#fca5a5" opacity="0.6" />
+
+          <!-- Mouth (Toggles for Lip Syncing) -->
+          ${mouthSvg}
+
+          <!-- Career Accessories / Headwear -->
+          ${getCareerAccessorySvg(careerId, theme)}
+        </svg>
+      `;
+
+      wrapper.innerHTML = svgContent;
     }
 
-    // --- Text To Speech & Lip-Sync Animation ---
-    function speakText(text) {
+    function getCareerAccessorySvg(careerId, theme) {
+      switch(careerId) {
+        case 'astronaut':
+          return `<circle cx="50" cy="50" r="28" fill="none" stroke="#60a5fa" stroke-width="2.5" opacity="0.7"/>
+                  <path d="M 26 40 Q 50 25 74 40" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>`;
+        case 'firefighter':
+          return `<path d="M 24 38 Q 50 20 76 38 Z" fill="${theme.hat}" />
+                  <rect x="22" y="36" width="56" height="4" rx="2" fill="#f59e0b" />
+                  <circle cx="50" cy="30" r="4" fill="#f59e0b" />`;
+        case 'chef':
+          return `<path d="M 32 34 C 28 20, 72 20, 68 34 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+                  <rect x="34" y="32" width="32" height="6" fill="#ffffff" stroke="#cbd5e1" />`;
+        case 'scientist':
+          return `<circle cx="41" cy="48" r="6" fill="none" stroke="#0284c7" stroke-width="2"/>
+                  <circle cx="59" cy="48" r="6" fill="none" stroke="#0284c7" stroke-width="2"/>
+                  <line x1="47" y1="48" x2="53" y2="48" stroke="#0284c7" stroke-width="2"/>`;
+        case 'singer':
+          return `<rect x="22" y="44" width="5" height="10" rx="2" fill="#ec4899"/>
+                  <rect x="73" y="44" width="5" height="10" rx="2" fill="#ec4899"/>
+                  <path d="M 24 44 Q 50 24 76 44" fill="none" stroke="#ec4899" stroke-width="3"/>`;
+        case 'doctor':
+        case 'vet':
+          return `<path d="M 35 78 Q 35 90 50 90 Q 65 90 65 78" fill="none" stroke="#64748b" stroke-width="2.5"/>
+                  <circle cx="50" cy="90" r="3" fill="#0284c7" />`;
+        case 'pilot':
+          return `<path d="M 28 36 Q 50 24 72 36 Z" fill="${theme.hat}" />
+                  <rect x="26" y="34" width="48" height="4" fill="#f59e0b" />
+                  <polygon points="50,28 47,33 53,33" fill="#f59e0b" />`;
+        case 'gamedev':
+          return `<path d="M 26 44 Q 50 26 74 44" fill="none" stroke="#8b5cf6" stroke-width="3.5"/>
+                  <circle cx="25" cy="48" r="4" fill="#8b5cf6"/>
+                  <circle cx="75" cy="48" r="4" fill="#8b5cf6"/>`;
+        default:
+          return `<path d="M 30 36 Q 50 26 70 36 Z" fill="${theme.hat}" />`;
+      }
+    }
+
+
+    /**
+     * AI STATUS PILL & ANIMATION CONTROLS
+     */
+    function setAiStatus(status) {
+      state.aiStatus = status;
+      const pill = document.getElementById("ai-status-pill");
+      const text = document.getElementById("ai-status-text");
+      const glow = document.getElementById("avatar-glow");
+
+      if (status === 'listening') {
+        pill.className = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200";
+        text.textContent = "AI Status: Listening...";
+        glow.className = "absolute -inset-2 bg-emerald-400 rounded-full blur opacity-50 speaking-pulse";
+      } else if (status === 'thinking') {
+        pill.className = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200";
+        text.textContent = "AI Status: Thinking...";
+        glow.className = "absolute -inset-2 bg-sky-400 rounded-full blur opacity-40 animate-pulse";
+      } else if (status === 'speaking') {
+        pill.className = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-pink-100 text-pink-800 border border-pink-200";
+        text.textContent = "AI Status: Speaking...";
+        glow.className = "absolute -inset-2 bg-pink-400 rounded-full blur opacity-60 speaking-pulse";
+      } else {
+        pill.className = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200";
+        text.textContent = "AI Status: Idle";
+        glow.className = "absolute -inset-2 bg-gradient-to-r from-sky-400 to-indigo-400 rounded-full blur opacity-30";
+      }
+    }
+
+
+    /**
+     * TEXT-TO-SPEECH (TTS) & ANIMATED LIP-SYNC TIMER
+     */
+    function speakTTS(textToSpeak) {
       if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
 
-      const utterance = new SpeechSynthesisUtterance(text);
+      // Stop previous utterance & interval
+      stopTTS();
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
       utterance.lang = 'en-US';
-      utterance.rate = 0.95;
+      utterance.rate = 0.95; // Slightly calmer pace suitable for P.5 learners
 
-      utterance.onstart = () => startLipSync();
-      utterance.onend = () => stopLipSync();
-      utterance.onerror = () => stopLipSync();
+      // Select female/male English voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')));
+      if (englishVoice) utterance.voice = englishVoice;
+
+      // Start lip-syncing animation
+      utterance.onstart = () => {
+        state.isSpeechTalking = true;
+        setAiStatus('speaking');
+
+        // Toggle closed & open mouth every 170ms
+        state.lipSyncInterval = setInterval(() => {
+          state.mouthOpen = !state.mouthOpen;
+          renderAvatar(state.mouthOpen);
+        }, 170);
+      };
+
+      // Stop lip-syncing when speech ends or fails
+      utterance.onend = () => stopTTS();
+      utterance.onerror = () => stopTTS();
 
       window.speechSynthesis.speak(utterance);
     }
 
-    function startLipSync() {
-      updateStatus("AI Speaking...", "speaking");
-      let toggle = false;
-      if (lipSyncTimer) clearInterval(lipSyncTimer);
-      
-      lipSyncTimer = setInterval(() => {
-        if (!selectedJob) return;
-        const img = document.getElementById("avatarImg");
-        img.src = toggle ? selectedJob.openMouth : selectedJob.closedMouth;
-        toggle = !toggle;
-      }, 180);
-    }
-
-    function stopLipSync() {
-      if (lipSyncTimer) clearInterval(lipSyncTimer);
-      if (selectedJob) {
-        document.getElementById("avatarImg").src = selectedJob.closedMouth;
+    function stopTTS() {
+      if (state.lipSyncInterval) {
+        clearInterval(state.lipSyncInterval);
+        state.lipSyncInterval = null;
       }
-      updateStatus("AI Idle", "idle");
+      state.isSpeechTalking = false;
+      state.mouthOpen = false;
+      renderAvatar(false);
+      setAiStatus('idle');
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
     }
 
-    function updateStatus(text, stateClass) {
-      const badge = document.getElementById("statusBadge");
-      badge.innerText = text;
-      badge.className = `status-badge ${stateClass}`;
-    }
 
-    // --- Speech To Text (STT) ---
-    function toggleSTT() {
+    /**
+     * SPEECH-TO-TEXT (STT) - WEB SPEECH API
+     */
+    function setupSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert("Speech recognition is not supported in this browser. Please use Chrome or Safari.");
+        console.warn("Web Speech Recognition API is not supported in this browser.");
         return;
       }
 
-      if (isRecording) {
-        recognition.stop();
-        return;
-      }
+      state.speechRecognition = new SpeechRecognition();
+      state.speechRecognition.continuous = false;
+      state.speechRecognition.interimResults = true;
+      state.speechRecognition.lang = 'en-US';
 
-      recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.interimResults = false;
-
-      recognition.onstart = () => {
-        isRecording = true;
-        document.getElementById("micBtn").classList.add("recording");
-        updateStatus("Listening...", "listening");
+      state.speechRecognition.onstart = () => {
+        state.isRecognizing = true;
+        setAiStatus('listening');
+        document.getElementById("mic-btn").classList.add("bg-emerald-500", "animate-bounce");
+        document.getElementById("stt-feedback").classList.remove("hidden");
+        document.getElementById("stt-feedback-text").textContent = "Listening... Speak now into your microphone.";
       };
 
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("userInput").value = transcript;
-        sendMessage();
+      state.speechRecognition.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        document.getElementById("user-input-field").value = transcript;
+        document.getElementById("stt-feedback-text").textContent = `Heard: "${transcript}"`;
       };
 
-      recognition.onerror = () => {
-        stopSTT();
+      state.speechRecognition.onerror = (event) => {
+        console.error("Speech Recognition Error:", event.error);
+        stopSpeechRecognition();
       };
 
-      recognition.onend = () => {
-        stopSTT();
+      state.speechRecognition.onend = () => {
+        stopSpeechRecognition();
       };
-
-      recognition.start();
     }
 
-    function stopSTT() {
-      isRecording = false;
-      document.getElementById("micBtn").classList.remove("recording");
-      updateStatus("AI Idle", "idle");
+    function toggleSpeechRecognition() {
+      if (!state.speechRecognition) {
+        alert("Speech Recognition is not supported by your browser. Please type your question.");
+        return;
+      }
+
+      if (state.isRecognizing) {
+        state.speechRecognition.stop();
+      } else {
+        stopTTS(); // Stop AI speaking if active
+        try {
+          state.speechRecognition.start();
+        } catch(e) {
+          console.error(e);
+        }
+      }
+    }
+
+    function stopSpeechRecognition() {
+      state.isRecognizing = false;
+      setAiStatus('idle');
+      document.getElementById("mic-btn").classList.remove("bg-emerald-500", "animate-bounce");
+      document.getElementById("stt-feedback").classList.add("hidden");
+      if (state.speechRecognition) {
+        try { state.speechRecognition.stop(); } catch(e){}
+      }
+    }
+
+
+    /**
+     * GEMINI API INTEGRATION & CHAT LOGIC
+     */
+    async function handleUserMessageSend(event) {
+      event.preventDefault();
+      const input = document.getElementById("user-input-field");
+      const question = input.value.trim();
+      if (!question) return;
+
+      input.value = "";
+      stopSpeechRecognition();
+      stopTTS();
+
+      // Add User Question to Chat
+      addChatMessage("user", question);
+      setAiStatus("thinking");
+
+      try {
+        // Call Gemini API
+        const aiResponse = await callGeminiApi(question);
+        addChatMessage("model", aiResponse);
+        speakTTS(aiResponse);
+      } catch (error) {
+        console.error("Gemini Error:", error);
+        const errorMsg = "Sorry, I am having trouble connecting to Gemini API right now. Please make sure your API Key is valid in settings!";
+        addChatMessage("model", errorMsg);
+        setAiStatus("idle");
+      }
+    }
+
+    async function callGeminiApi(userQuestion) {
+      const apiKey = state.customApiKey || GEMINI_API_KEY || "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const career = CAREERS[state.selectedCareer];
+      
+      // System Instruction: Persona suitable for HK P.5 English Learner (10-11 yrs old)
+      const systemInstructionText = `You are a professional ${career.title} being interviewed by a Hong Kong Primary 5 (10-11 years old) primary school student named ${state.studentName}.
+Rules:
+1. Be extremely encouraging, friendly, and inspiring. Use simple English suitable for primary school ESL/EFL learners.
+2. Keep your answers brief (2 to 3 short sentences max) so that the browser text-to-speech reads it smoothly and the avatar speaks naturally.
+3. Address ${state.studentName} warmly by name occasionally.`;
+
+      // Build payload including chat history
+      const formattedHistory = state.chatHistory.map(msg => ({
+        role: msg.role === 'user' ? 'user' : 'model',
+        parts: [{ text: msg.text }]
+      }));
+
+      const payload = {
+        contents: formattedHistory,
+        systemInstruction: {
+          parts: [{ text: systemInstructionText }]
+        }
+      };
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errJson = await response.json().catch(() => ({}));
+        throw new Error(errJson.error?.message || `HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      return reply || "Thank you for that great question! I love sharing my job with students.";
+    }
+
+    function addChatMessage(role, text) {
+      state.chatHistory.push({ role, text });
+      renderChatMessages();
+    }
+
+    function renderChatMessages() {
+      const container = document.getElementById("chat-messages");
+      container.innerHTML = "";
+
+      state.chatHistory.forEach((msg, index) => {
+        const isUser = msg.role === "user";
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'} items-end animate-in fade-in duration-200`;
+
+        const avatarBadge = isUser
+          ? `<div class="w-8 h-8 rounded-full bg-sky-500 text-white font-bold flex items-center justify-center text-xs shadow-sm">${state.studentName.charAt(0).toUpperCase()}</div>`
+          : `<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-sky-400 text-white font-bold flex items-center justify-center text-xs shadow-sm">${CAREERS[state.selectedCareer].emoji}</div>`;
+
+        msgDiv.innerHTML = `
+          ${avatarBadge}
+          <div class="max-w-[80%] rounded-2xl p-3.5 text-sm ${
+            isUser
+              ? 'bg-sky-500 text-white rounded-br-none shadow-sm'
+              : 'bg-white text-slate-800 rounded-bl-none border border-slate-200 shadow-sm'
+          }">
+            <p class="leading-relaxed font-medium">${msg.text}</p>
+            ${!isUser ? `
+              <button onclick="speakTTS('${escapeQuotes(msg.text)}')" class="mt-2 text-[11px] font-bold text-sky-600 hover:text-sky-800 transition flex items-center gap-1">
+                <i class="fa-solid fa-volume-high"></i> Read Aloud
+              </button>
+            ` : ''}
+          </div>
+        `;
+
+        container.appendChild(msgDiv);
+      });
+
+      // Auto scroll to bottom
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function clearChatLog() {
+      state.chatHistory = [];
+      renderChatMessages();
+      stopTTS();
+    }
+
+    function escapeQuotes(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+
+    /**
+     * API KEY MODAL CONTROLS
+     */
+    function toggleSettingsModal(show) {
+      document.getElementById("settings-modal").classList.toggle("hidden", !show);
+    }
+
+    function saveApiKey() {
+      const key = document.getElementById("api-key-input").value.trim();
+      state.customApiKey = key;
+      localStorage.setItem("gemini_api_key", key);
+      toggleSettingsModal(false);
+      alert("API Key saved successfully!");
+    }
+
+    function toggleGuideModal(show) {
+      document.getElementById("guide-modal").classList.toggle("hidden", !show);
     }
   </script>
 </body>
