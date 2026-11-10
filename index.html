@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Career Interview - Hong Kong P.5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --accent: #F59E0B;
+      --bg-color: #EEF2FF;
+      --card-bg: #FFFFFF;
+      --text-color: #1F2937;
+      --text-muted: #6B7280;
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: var(--card-bg);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Fredoka', sans-serif;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* STEP 1: Name Input */
+    .step-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.1s, background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-secondary {
+      background-color: #E5E7EB;
+      color: var(--text-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: #D1D5DB;
+    }
+
+    /* STEP 2: Job Selection Grid */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .job-card {
+      border: 2px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+    }
+
+    .job-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    }
+
+    .job-card.selected {
+      border-color: var(--primary);
+      background-color: #EEF2FF;
+    }
+
+    .job-card img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 0.8rem;
+      border: 3px solid #E5E7EB;
+    }
+
+    .job-card h3 {
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
+    /* STEP 3: Chatroom & Avatar Display */
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .avatar-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #F9FAFB;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 2px solid #F3F4F6;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 1rem;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: #E5E7EB;
+      color: var(--text-muted);
+    }
+
+    .status-badge.speaking {
+      background: #D1FAE5;
+      color: #059669;
+    }
+
+    .status-badge.listening {
+      background: #FEF3C7;
+      color: #D97706;
+    }
+
+    .chat-panel {
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      background: #FAFAFA;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 0.8rem 1rem;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.ai {
+      align-self: flex-start;
+      background: white;
+      border: 1px solid #E5E7EB;
+      color: var(--text-color);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .chat-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-mic {
+      background-color: #EF4444;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .btn-mic.recording {
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 AI Career Interview</h1>
+    <button class="btn btn-secondary" onclick="resetApp()">Start Over</button>
+  </header>
+
+  <div class="container">
+    
+    <!-- STEP 1: Name Input -->
+    <div id="step1" class="card">
+      <h2 class="step-title">Step 1: Enter Your Name</h2>
+      <p class="step-desc">Welcome! What is your name?</p>
+      <div class="input-group">
+        <input type="text" id="studentNameInput" placeholder="e.g. Alex" />
+        <button class="btn" onclick="goToStep2()">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Job Selection -->
+    <div id="step2" class="card hidden">
+      <h2 class="step-title">Step 2: Pick a Career to Interview</h2>
+      <p class="step-desc">Choose who you would like to interview today:</p>
+      <div class="jobs-grid" id="jobsGrid"></div>
+      <div style="margin-top: 1.5rem; text-align: right;">
+        <button class="btn" onclick="startInterview()">Start Interview &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Chatroom & Talking Avatar -->
+    <div id="step3" class="card hidden">
+      <div class="chat-layout">
+        <div class="avatar-panel">
+          <div class="avatar-wrapper">
+            <img id="avatarImg" class="avatar-img" src="" alt="Avatar" />
+          </div>
+          <h3 id="avatarTitle" style="margin-bottom: 0.5rem;">Job Title</h3>
+          <span id="statusBadge" class="status-badge">AI Idle</span>
+        </div>
+
+        <div class="chat-panel">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-controls">
+            <button id="micBtn" class="btn btn-mic" onclick="toggleSTT()" title="Tap to Speak">🎤</button>
+            <input type="text" id="userInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)" />
+            <button class="btn" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. GEMINI API KEY CONFIGURATION
+    // Replace the string below with your Gemini API Key
+    // =========================================================================
+    const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+
+    // =========================================================================
+    // 2. CAREER & PHOTO CONFIGURATION
+    // You can replace closedMouth & openMouth URLs with your own photo links!
+    // =========================================================================
+    const JOBS = [
+      {
+        id: "astronaut",
+        name: "Astronaut",
+        closedMouth: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&auto=format&fit=crop",
+        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+      },
+      {
+        id: "firefighter",
+        name: "Firefighter",
+        closedMouth: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&auto=format&fit=crop",
+        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+      },
+      {
+        id: "chef",
+        name: "Chef",
+        closedMouth: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&auto=format&fit=crop",
+        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+      },
+      {
+        id: "scientist",
+        name: "Scientist",
+        closedMouth: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&auto=format&fit=crop",
+        openMouth: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=400&auto=format&fit=crop"
+      }
+    ];
+
+    let studentName = "";
+    let selectedJob = null;
+    let lipSyncTimer = null;
+    let recognition = null;
+    let isRecording = false;
+
+    // --- Step Navigation ---
+    function goToStep2() {
+      const name = document.getElementById("studentNameInput").value.trim();
+      if (!name) {
+        alert("Please enter your name!");
+        return;
+      }
+      studentName = name;
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+      renderJobGrid();
+    }
+
+    function renderJobGrid() {
+      const grid = document.getElementById("jobsGrid");
+      grid.innerHTML = "";
+      JOBS.forEach(job => {
+        const card = document.createElement("div");
+        card.className = `job-card ${selectedJob?.id === job.id ? 'selected' : ''}`;
+        card.onclick = () => {
+          selectedJob = job;
+          document.querySelectorAll('.job-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+        };
+        card.innerHTML = `
+          <img src="${job.closedMouth}" alt="${job.name}" />
+          <h3>${job.name}</h3>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function startInterview() {
+      if (!selectedJob) {
+        alert("Please select a career to interview!");
+        return;
+      }
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+
+      document.getElementById("avatarImg").src = selectedJob.closedMouth;
+      document.getElementById("avatarTitle").innerText = selectedJob.name;
+
+      addChatMessage("ai", `Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me today?`);
+      speakText(`Hello ${studentName}! I am a professional ${selectedJob.name}. What would you like to ask me today?`);
+    }
+
+    function resetApp() {
+      window.speechSynthesis.cancel();
+      stopLipSync();
+      studentName = "";
+      selectedJob = null;
+      document.getElementById("chatMessages").innerHTML = "";
+      document.getElementById("step3").classList.add("hidden");
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step1").classList.remove("hidden");
+    }
+
+    // --- Chat Logic ---
+    function addChatMessage(sender, text) {
+      const box = document.getElementById("chatMessages");
+      const msg = document.createElement("div");
+      msg.className = `message ${sender}`;
+      msg.innerText = text;
+      box.appendChild(msg);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function handleKeyPress(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = "";
+      addChatMessage("user", text);
+
+      updateStatus("AI Thinking...", "listening");
+
+      try {
+        const responseText = await callGeminiAPI(text);
+        addChatMessage("ai", responseText);
+        speakText(responseText);
+      } catch (err) {
+        console.error(err);
+        addChatMessage("ai", "Sorry, I had trouble responding. Please check your API key.");
+        updateStatus("AI Idle", "idle");
+      }
+    }
+
+    // --- Gemini API Call ---
+    async function callGeminiAPI(userQuery) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+      
+      const systemInstruction = `You are a professional ${selectedJob.name} being interviewed by ${studentName}, a Primary 5 student in Hong Kong (10-11 years old).
+Rules:
+1. Be encouraging, friendly, and inspiring.
+2. Use simple English suitable for primary school ESL learners.
+3. Keep answers brief (2-3 short sentences max) so text-to-speech avatar playback sounds natural.`;
+
+      const payload = {
+        contents: [{ role: "user", parts: [{ text: userQuery }] }],
+        systemInstruction: { parts: [{ text: systemInstruction }] }
+      };
+
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || "Thank you for that question!";
+    }
+
+    // --- Text To Speech & Lip-Sync Animation ---
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+
+      utterance.onstart = () => startLipSync();
+      utterance.onend = () => stopLipSync();
+      utterance.onerror = () => stopLipSync();
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function startLipSync() {
+      updateStatus("AI Speaking...", "speaking");
+      let toggle = false;
+      if (lipSyncTimer) clearInterval(lipSyncTimer);
+      
+      lipSyncTimer = setInterval(() => {
+        if (!selectedJob) return;
+        const img = document.getElementById("avatarImg");
+        img.src = toggle ? selectedJob.openMouth : selectedJob.closedMouth;
+        toggle = !toggle;
+      }, 180);
+    }
+
+    function stopLipSync() {
+      if (lipSyncTimer) clearInterval(lipSyncTimer);
+      if (selectedJob) {
+        document.getElementById("avatarImg").src = selectedJob.closedMouth;
+      }
+      updateStatus("AI Idle", "idle");
+    }
+
+    function updateStatus(text, stateClass) {
+      const badge = document.getElementById("statusBadge");
+      badge.innerText = text;
+      badge.className = `status-badge ${stateClass}`;
+    }
+
+    // --- Speech To Text (STT) ---
+    function toggleSTT() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Speech recognition is not supported in this browser. Please use Chrome or Safari.");
+        return;
+      }
+
+      if (isRecording) {
+        recognition.stop();
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+
+      recognition.onstart = () => {
+        isRecording = true;
+        document.getElementById("micBtn").classList.add("recording");
+        updateStatus("Listening...", "listening");
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("userInput").value = transcript;
+        sendMessage();
+      };
+
+      recognition.onerror = () => {
+        stopSTT();
+      };
+
+      recognition.onend = () => {
+        stopSTT();
+      };
+
+      recognition.start();
+    }
+
+    function stopSTT() {
+      isRecording = false;
+      document.getElementById("micBtn").classList.remove("recording");
+      updateStatus("AI Idle", "idle");
+    }
+  </script>
+</body>
+</html>
