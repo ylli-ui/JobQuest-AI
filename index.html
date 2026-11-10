@@ -52,7 +52,7 @@
       padding: 16px;
     }
 
-    /* Header & Key Setup Bar */
+    /* Header & No-Key Status Badge */
     .app-header {
       width: 100%;
       max-width: 1200px;
@@ -78,34 +78,17 @@
       letter-spacing: 0.5px;
     }
 
-    .api-key-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .free-badge {
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(4px);
-      padding: 6px 14px;
-      border-radius: var(--radius-md);
-    }
-
-    .api-key-container label {
-      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
       font-weight: 700;
-    }
-
-    .api-key-container input {
-      padding: 6px 12px;
-      border: 2px solid transparent;
-      border-radius: var(--radius-sm);
-      outline: none;
-      font-size: 0.85rem;
-      width: 180px;
-      transition: all 0.2s;
-    }
-
-    .api-key-container input:focus {
-      border-color: var(--dark-pink);
-      background: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
     }
 
     /* Main Layout Grid */
@@ -118,7 +101,7 @@
       align-items: start;
     }
 
-    /* Left & Right Panels */
+    /* Panels */
     .panel {
       background: var(--white);
       border-radius: var(--radius-lg);
@@ -204,6 +187,7 @@
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       user-select: none;
+      min-height: 70px;
     }
 
     .career-card:hover {
@@ -488,10 +472,9 @@
     }
 
     .mic-btn {
-      background-color: var(--lavender);
+      background-color: #F0FFF4;
       border: 2px solid #C6F6D5;
       color: #2F855A;
-      background: #F0FFF4;
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -545,7 +528,7 @@
       transform: none;
     }
 
-    /* Loading Spinner */
+    /* Typing Dots */
     .typing-indicator {
       display: flex;
       align-items: center;
@@ -574,9 +557,7 @@
       40% { transform: scale(1); }
     }
 
-    /* ==========================================================================
-       RESPONSIVE DESIGN (Tablets & Mobile Devices)
-       ========================================================================== */
+    /* Responsive Styles */
     @media (max-width: 900px) {
       .app-layout {
         grid-template-columns: 1fr;
@@ -600,15 +581,6 @@
 
       .app-header h1 {
         font-size: 1.4rem;
-      }
-
-      .api-key-container {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .api-key-container input {
-        width: 140px;
       }
 
       .panel {
@@ -650,9 +622,8 @@
   <!-- App Header -->
   <header class="app-header">
     <h1><span>🌟</span> AI Career Interview <span>👩‍🏫</span></h1>
-    <div class="api-key-container">
-      <label for="apiKeyInput">Gemini Key:</label>
-      <input type="password" id="apiKeyInput" placeholder="Paste API Key here..." aria-label="Gemini API Key Input">
+    <div class="free-badge">
+      <span>⚡ Instant Access (No Key Needed)</span>
     </div>
   </header>
 
@@ -752,12 +723,8 @@
   <!-- JavaScript Code Section -->
   <script>
     /* ==========================================================================
-       1. CONFIG
+       1. CONFIG (Embedded Cute Closed & Open Mouth SVG Avatars)
        ========================================================================== */
-    // Default API Key constant. Teachers can paste here directly OR use the top-right header input box.
-    const GEMINI_API_KEY = "PASTE_YOUR_API_KEY_HERE";
-
-    // Embedded SVG Data URIs for cute default avatars (Closed & Open Mouth)
     const CLOSED_MOUTH_IMG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' rx='40' fill='%23FFD6E8'/><circle cx='100' cy='100' r='70' fill='%23FFFFFF' stroke='%23FF69B4' stroke-width='6'/><circle cx='75' cy='90' r='10' fill='%23333333'/><circle cx='125' cy='90' r='10' fill='%23333333'/><circle cx='78' cy='87' r='3' fill='%23FFFFFF'/><circle cx='128' cy='87' r='3' fill='%23FFFFFF'/><ellipse cx='60' cy='115' rx='10' ry='6' fill='%23FFB6C1' opacity='0.7'/><ellipse cx='140' cy='115' rx='10' ry='6' fill='%23FFB6C1' opacity='0.7'/><path d='M 85 118 Q 100 130 115 118' fill='none' stroke='%23FF69B4' stroke-width='5' stroke-linecap='round'/><polygon points='100,30 110,50 90,50' fill='%23FFD166'/></svg>";
 
     const OPEN_MOUTH_IMG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' rx='40' fill='%23FFD6E8'/><circle cx='100' cy='100' r='70' fill='%23FFFFFF' stroke='%23FF69B4' stroke-width='6'/><circle cx='75' cy='90' r='10' fill='%23333333'/><circle cx='125' cy='90' r='10' fill='%23333333'/><circle cx='78' cy='87' r='3' fill='%23FFFFFF'/><circle cx='128' cy='87' r='3' fill='%23FFFFFF'/><ellipse cx='60' cy='115' rx='10' ry='6' fill='%23FFB6C1' opacity='0.7'/><ellipse cx='140' cy='115' rx='10' ry='6' fill='%23FFB6C1' opacity='0.7'/><path d='M 85 112 Q 100 135 115 112 Z' fill='%23FF69B4' stroke='%23D81B60' stroke-width='3'/><polygon points='100,30 110,50 90,50' fill='%23FFD166'/></svg>";
@@ -882,7 +849,6 @@
     /* ==========================================================================
        4. UI ELEMENTS & APP STATE
        ========================================================================== */
-    const apiKeyInput = document.getElementById("apiKeyInput");
     const studentNameInput = document.getElementById("studentNameInput");
     const careerGrid = document.getElementById("careerGrid");
     const avatarImg = document.getElementById("avatarImg");
@@ -899,9 +865,9 @@
     const micBtn = document.getElementById("micBtn");
 
     let currentCareer = CAREERS[0]; // Default: Teacher
-    let conversationHistory = []; // Session chat history
-    let mouthInterval = null; // Avatar animation interval
-    let recognition = null; // Speech recognition instance
+    let conversationHistory = [];
+    let mouthInterval = null;
+    let recognition = null;
     let isListening = false;
 
 
@@ -913,7 +879,7 @@
     }
 
     function startTalkingAnimation() {
-      stopTalkingAnimation(); // Ensure no duplicate intervals
+      stopTalkingAnimation();
       let isOpen = false;
       avatarImg.src = OPEN_MOUTH_IMG;
       isOpen = true;
@@ -954,7 +920,6 @@
       recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
-      // Primary English fallback order
       recognition.lang = 'en-US';
 
       recognition.onstart = () => {
@@ -1012,20 +977,18 @@
         return;
       }
 
-      // Cancel previous speech
       window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
-      
-      // Select best available English voice
       const voices = window.speechSynthesis.getVoices();
       const englishVoice = voices.find(v => v.lang.startsWith('en-US') || v.lang.startsWith('en-GB') || v.lang.startsWith('en'));
+      
       if (englishVoice) {
         utterance.voice = englishVoice;
       }
 
       utterance.lang = 'en-US';
-      utterance.rate = 0.95; // Friendly cadence for Primary 5 ESL learners
+      utterance.rate = 0.95;
       utterance.pitch = 1.05;
 
       utterance.onstart = () => {
@@ -1051,73 +1014,49 @@
 
 
     /* ==========================================================================
-       8. GEMINI API INTEGRATION
+       8. KEYLESS PUBLIC AI API (No Key Needed, Works Globally & in HK)
        ========================================================================== */
-    async function callGeminiAPI(userQuestion, career, studentName) {
-      // Determine active API Key
-      const keyFromInput = apiKeyInput.value.trim();
-      const apiKey = keyFromInput || (GEMINI_API_KEY !== "PASTE_YOUR_API_KEY_HERE" ? GEMINI_API_KEY : "");
-
-      if (!apiKey) {
-        throw new Error("Please paste your Gemini API Key in the top box to chat!");
-      }
-
-      // Primary 5 ESL Prompt Persona Definition
+    async function callKeylessAI(userQuestion, career, studentName) {
       const systemInstruction = `You are a professional ${career.title}.
-You are being interviewed by Primary 5 students in Hong Kong aged 10–11.
+You are being interviewed by Primary 5 students in Hong Kong aged 10–11 named ${studentName}.
 Rules:
 1. Be cheerful, warm, and encouraging.
 2. Use simple English suitable for ESL/EFL learners.
-3. Keep answers short.
-4. Maximum 2–3 short sentences.
-5. Give realistic examples from your work.
-6. Encourage curiosity and learning.
-7. Avoid difficult vocabulary.
-8. Speak directly to children.
-9. If asked about dangerous activities, explain safely and appropriately for children.`;
+3. Keep answers short (2 to 3 sentences maximum).
+4. Give realistic examples from your work.
+5. Encourage curiosity and learning.
+6. Avoid difficult vocabulary.
+7. Speak directly to children.`;
 
-      // Structure conversation history for Gemini API payload
-      const contents = conversationHistory.map(msg => ({
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
-      }));
+      const messages = [
+        { role: "system", content: systemInstruction },
+        ...conversationHistory.map(msg => ({
+          role: msg.role === 'user' ? 'user' : 'assistant',
+          content: msg.content
+        })),
+        { role: "user", content: userQuestion }
+      ];
 
-      // Append new question
-      contents.push({
-        role: 'user',
-        parts: [{ text: userQuestion }]
-      });
-
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
+      // Keyless, free open REST API endpoint
+      const response = await fetch("https://text.pollinations.ai/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: systemInstruction }]
-          },
-          contents: contents,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 250
-          }
+          messages: messages,
+          seed: Math.floor(Math.random() * 10000)
         })
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const message = errorData.error?.message || `HTTP error ${response.status}`;
-        throw new Error(message);
+        throw new Error(`Server returned status ${response.status}`);
       }
 
-      const data = await response.json();
-      const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-      if (!replyText) {
-        throw new Error("No response generated from AI.");
+      const replyText = await response.text();
+      
+      if (!replyText || replyText.trim().length === 0) {
+        throw new Error("Empty response received from AI server.");
       }
 
       return replyText.trim();
@@ -1143,7 +1082,6 @@ Rules:
       bubble.appendChild(body);
       chatMessages.appendChild(bubble);
 
-      // Auto-scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -1177,21 +1115,19 @@ Rules:
       appendMessage(studentName, question, "user");
       conversationHistory.push({ role: "user", content: question });
 
-      // Clear input
       questionInput.value = "";
       sendBtn.disabled = true;
 
-      // Update AI Status
       updateStatus("Processing...", "processing");
       showTypingIndicator();
 
       try {
-        const aiResponse = await callGeminiAPI(question, currentCareer, studentName);
+        const aiResponse = await callKeylessAI(question, currentCareer, studentName);
         removeTypingIndicator();
 
         // Display AI message
         appendMessage(`${currentCareer.emoji} ${currentCareer.title}`, aiResponse, "ai");
-        conversationHistory.push({ role: "model", content: aiResponse });
+        conversationHistory.push({ role: "assistant", content: aiResponse });
 
         // Speak AI answer aloud with avatar animation
         speakText(aiResponse, () => {
@@ -1200,10 +1136,12 @@ Rules:
 
       } catch (error) {
         removeTypingIndicator();
-        console.error("API Error:", error);
+        console.error("AI Generation Error:", error);
         
-        const errorMsg = `Oops! ${error.message}`;
-        appendMessage("System 💡", errorMsg, "ai");
+        const fallbackText = `Hello ${studentName}! Being a ${currentCareer.title} is full of exciting work every day! Keep asking great questions and stay curious!`;
+        appendMessage(`${currentCareer.emoji} ${currentCareer.title}`, fallbackText, "ai");
+        speakText(fallbackText);
+        
         updateStatus("Ready", "ready");
         sendBtn.disabled = false;
       }
@@ -1236,15 +1174,12 @@ Rules:
           card.classList.add("active");
           card.setAttribute("aria-checked", "true");
           
-          // Reset conversation history for new career
           conversationHistory = [];
           chatMessages.innerHTML = "";
 
-          // Update UI
           careerBadge.textContent = `${career.title} ${career.emoji}`;
           renderSuggestedQuestions();
 
-          // Initial greeting
           const greeting = `Hello ${studentNameInput.value.trim() || 'there'}! I am a professional ${career.title} ${career.emoji}. What would you like to ask me today?`;
           appendMessage(`${career.emoji} ${career.title}`, greeting, "ai");
           speakText(greeting);
@@ -1265,7 +1200,6 @@ Rules:
     function renderSuggestedQuestions() {
       suggestedQuestionsGrid.innerHTML = "";
       
-      // Combine career-specific and universal questions
       const careerSpecific = CAREER_QUESTIONS[currentCareer.id] || [];
       const combinedQuestions = [...careerSpecific, ...UNIVERSAL_QUESTIONS].slice(0, 8);
 
@@ -1292,33 +1226,18 @@ Rules:
       questionInput.focus();
     }
 
-    // Initialize Application
     window.addEventListener("DOMContentLoaded", () => {
       initAvatar();
       renderCareers();
       renderSuggestedQuestions();
       setupSpeechRecognition();
 
-      // Check saved key in localStorage
-      const savedKey = localStorage.getItem("user_gemini_api_key");
-      if (savedKey) {
-        apiKeyInput.value = savedKey;
-      }
-
-      // Save API key on change
-      apiKeyInput.addEventListener("input", () => {
-        localStorage.setItem("user_gemini_api_key", apiKeyInput.value.trim());
-      });
-
-      // Toggle suggested questions panel
       toggleSuggestions.addEventListener("change", (e) => {
         suggestedQuestionsContainer.style.display = e.target.checked ? "flex" : "none";
       });
 
-      // Random question generator button
       ideaBtn.addEventListener("click", handleRandomIdea);
 
-      // Send message handlers
       sendBtn.addEventListener("click", handleSendQuestion);
       questionInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
@@ -1327,10 +1246,8 @@ Rules:
         }
       });
 
-      // Mic button handler
       micBtn.addEventListener("click", toggleListening);
 
-      // Initial Welcome Message
       const initialGreeting = `Hello Alex! I am a professional Teacher 👩‍🏫. What would you like to ask me today?`;
       appendMessage("👩‍🏫 Teacher", initialGreeting, "ai");
     });
